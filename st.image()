@@ -1,0 +1,24 @@
+import streamlit as st
+from PIL import Image
+
+# Load images
+bg_image = Image.open("background.png")
+exercise_image = Image.open("exercise.png")
+diet_image = Image.open("diet.png")
+
+# Display background (optional, as CSS)
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url("background.png");
+        background-size: cover;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Display images in app
+st.image(exercise_image, caption="Professional Exercise Plan", use_column_width=True)
+st.image(diet_image, caption="Professional Diet Plan", use_column_width=True)
