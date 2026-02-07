@@ -1,0 +1,35 @@
+import sqlite3
+from datetime import datetime
+
+# Connect or create database
+conn = sqlite3.connect("nutriguide.db", check_same_thread=False)
+cursor = conn.cursor()
+
+# Create users table
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    age INTEGER,
+    gender TEXT,
+    height REAL,
+    weight REAL,
+    created_at TEXT
+)
+""")
+
+# Create daily_logs table
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS daily_logs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    date TEXT,
+    weight REAL,
+    calories REAL,
+    water REAL,
+    exercise TEXT,
+    FOREIGN KEY(user_id) REFERENCES users(id)
+)
+""")
+
+conn.commit()
